@@ -1,0 +1,10 @@
+[application]
+
+icon="res://icon.png"
+main_scene="res://main.tscn"
+name="GodotVR Demo"
+
+[display]
+
+window/use_vsync=false
+
