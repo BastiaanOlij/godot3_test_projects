@@ -1,0 +1,427 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Cube_6.PNG" type="Texture" id=1]
+[ext_resource path="res://NormalMap_6.png" type="Texture" id=2]
+[ext_resource path="res://Cube_4.PNG" type="Texture" id=3]
+[ext_resource path="res://NormalMap_4.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+
+flags_transparent = false
+flags_unshaded = false
+flags_on_top = false
+flags_use_point_size = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+albedo_color = Color( 0.7, 0.7, 0.7, 1 )
+albedo_texture = ExtResource( 1 )
+metallic_amount = 0.1
+metallic_specular = 0.5
+roughness_amount = 0.0
+emission_enabled = false
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource( 2 )
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector2( 1, 1 )
+uv1_offset = Vector2( 0, 0 )
+uv2_scale = Vector2( 1, 1 )
+uv2_offset = Vector2( 0, 0 )
+
+[sub_resource type="CubeMesh" id=2]
+
+material = SubResource( 1 )
+size = Vector3( 1, 1, 1 )
+subdivide_width = 2
+subdivide_height = 2
+subdivide_depth = 2
+
+[sub_resource type="SpatialMaterial" id=3]
+
+flags_transparent = false
+flags_unshaded = false
+flags_on_top = false
+flags_use_point_size = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 3 )
+metallic_amount = 0.26
+metallic_specular = 0.38
+roughness_amount = 0.44
+emission_enabled = false
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector2( 1, 1 )
+uv1_offset = Vector2( 0, 0 )
+uv2_scale = Vector2( 1, 1 )
+uv2_offset = Vector2( 0, 0 )
+
+[sub_resource type="SphereMesh" id=4]
+
+material = SubResource( 3 )
+radius = 0.5
+height = 1.0
+radial_segments = 16
+rings = 8
+is_hemisphere = false
+
+[sub_resource type="SphereMesh" id=5]
+
+material = SubResource( 3 )
+radius = 0.5
+height = 0.5
+radial_segments = 16
+rings = 8
+is_hemisphere = true
+
+[sub_resource type="PrismMesh" id=6]
+
+material = SubResource( 1 )
+left_to_right = 0.3
+size = Vector3( 1, 1, 1 )
+subdivide_width = 1
+subdivide_height = 1
+subdivide_depth = 1
+
+[sub_resource type="CylinderMesh" id=7]
+
+material = SubResource( 3 )
+top_radius = 0.5
+bottom_radius = 0.5
+height = 1.0
+radial_segments = 16
+rings = 8
+
+[sub_resource type="PlaneMesh" id=8]
+
+material = SubResource( 3 )
+size = Vector2( 20, 20 )
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="CapsuleMesh" id=9]
+
+material = SubResource( 3 )
+radius = 0.5
+mid_height = 0.5
+radial_segments = 16
+rings = 4
+
+[sub_resource type="QuadMesh" id=10]
+
+material = SubResource( 3 )
+
+[sub_resource type="ProceduralSky" id=11]
+
+radiance_size = 1
+sky_top_color = Color( 0.301961, 0.403922, 0.909804, 1 )
+sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
+sky_curve = 0.25
+sky_energy = 1.0
+ground_bottom_color = Color( 0.196078, 0.152941, 0.0980392, 1 )
+ground_horizon_color = Color( 0.329412, 0.211765, 0.0627451, 1 )
+ground_curve = 0.25
+ground_energy = 1.0
+sun_color = Color( 1, 1, 1, 1 )
+sun_latitude = 35.0
+sun_longitude = 0.0
+sun_angle_min = 1.0
+sun_angle_max = 100.0
+sun_curve = 0.05
+sun_energy = 16.0
+texture_size = 0
+
+[sub_resource type="Environment" id=12]
+
+background_mode = 2
+background_sky = SubResource( 11 )
+background_sky_scale = 1.0
+background_color = Color( 0, 0, 0, 1 )
+background_energy = 1.0
+background_canvas_max_layer = 0
+ambient_light_color = Color( 0, 0, 0, 1 )
+ambient_light_energy = 1.0
+ambient_light_sky_contribution = 0.0
+fog_enabled = false
+fog_color = Color( 0.5, 0.6, 0.7, 1 )
+fog_sun_color = Color( 1, 0.9, 0.7, 1 )
+fog_sun_amount = 0.0
+fog_depth_enabled = true
+fog_depth_begin = 10.0
+fog_depth_curve = 1.0
+fog_transmit_enabled = false
+fog_transmit_curve = 1.0
+fog_height_enabled = false
+fog_height_min = 0.0
+fog_height_max = 100.0
+fog_height_curve = 1.0
+tonemap_mode = 0
+tonemap_exposure = 1.0
+tonemap_white = 1.0
+auto_exposure_enabled = false
+auto_exposure_scale = 0.4
+auto_exposure_min_luma = 0.05
+auto_exposure_max_luma = 8.0
+auto_exposure_speed = 0.5
+ss_reflections_enabled = false
+ss_reflections_max_steps = 64
+ss_reflections_fade_in = 0.15
+ss_reflections_fade_out = 2.0
+ss_reflections_depth_tolerance = 0.2
+ss_reflections_roughness = true
+ssao_enabled = false
+ssao_radius = 1.0
+ssao_intensity = 1.0
+ssao_radius2 = 0.0
+ssao_intensity2 = 1.0
+ssao_bias = 0.01
+ssao_light_affect = 0.0
+ssao_color = Color( 0, 0, 0, 1 )
+ssao_blur = true
+dof_blur_far_enabled = false
+dof_blur_far_distance = 10.0
+dof_blur_far_transition = 5.0
+dof_blur_far_amount = 0.1
+dof_blur_far_quality = 1
+dof_blur_near_enabled = false
+dof_blur_near_distance = 2.0
+dof_blur_near_transition = 1.0
+dof_blur_near_amount = 0.1
+dof_blur_near_quality = 1
+glow_enabled = false
+glow_levels/1 = false
+glow_levels/2 = false
+glow_levels/3 = true
+glow_levels/4 = false
+glow_levels/5 = true
+glow_levels/6 = false
+glow_levels/7 = false
+glow_intensity = 0.8
+glow_strength = 1.0
+glow_bloom = 0.0
+glow_blend_mode = 2
+glow_hdr_treshold = 1.0
+glow_hdr_scale = 2.0
+glow_bicubic_upscale = false
+adjustment_enabled = false
+adjustment_brightness = 1.0
+adjustment_contrast = 1.0
+adjustment_saturation = 1.0
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Cube" type="MeshInstance" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23707, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+visible_in_all_rooms = false
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="Sphere" type="MeshInstance" parent="."]
+
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+visible_in_all_rooms = false
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 4 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="HemiSphere" type="MeshInstance" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28399, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+visible_in_all_rooms = false
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 5 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="Prism" type="MeshInstance" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51936, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+visible_in_all_rooms = false
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 6 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="Cylinder" type="MeshInstance" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58571, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+visible_in_all_rooms = false
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 7 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="Plane" type="MeshInstance" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.18123, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+visible_in_all_rooms = false
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="Capsule" type="MeshInstance" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.22157, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+visible_in_all_rooms = false
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 9 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="Quad" type="MeshInstance" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.73903, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+visible_in_all_rooms = false
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 10 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+
+transform = Transform( 0.878092, 0, 0.478492, -0.237199, 0.868481, 0.43529, -0.415562, -0.495722, 0.762606, 0, 9.89827, 2.52093 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_negative = false
+light_specular = 0.5
+light_cull_mask = -1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.1
+shadow_contact = 0.0
+shadow_max_distance = 0.0
+editor_only = false
+directional_shadow_mode = 2
+directional_shadow_split_1 = 0.1
+directional_shadow_split_2 = 0.2
+directional_shadow_split_3 = 0.5
+directional_shadow_blend_splits = false
+directional_shadow_normal_bias = 0.1
+
+[node name="OmniLight" type="OmniLight" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33477, 0.276033, 0.816065 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_negative = false
+light_specular = 0.5
+light_cull_mask = -1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.1
+shadow_contact = 0.0
+shadow_max_distance = 0.0
+editor_only = false
+omni_range = 5.0
+omni_attenuation = 1.0
+omni_shadow_mode = 0
+omni_shadow_detail = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+environment = SubResource( 12 )
+
+
