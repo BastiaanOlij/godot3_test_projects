@@ -35,6 +35,9 @@ func _ready():
 			# set viewport to VR mode, our ar/vr server will be in control of our output
 			get_viewport().set_use_arvr(true)
 			
+			# reset to our initial reference frame. This will center our HMD to our origin point.
+			ArVrServer.request_reference_frame(true, false)
+			
 			$Using.text = "Using: " + arvr_interface.get_name()
 		else:
 			arvr_interface = null
@@ -44,7 +47,6 @@ func _ready():
 		# set viewport to normal mode, this will make our screen work as per usual...
 		get_viewport().set_use_arvr(false)
 		$Using.text = "No AR/VR interface"
-		camera.translation = Vector3(0.0, 1.85, 0.0)
 
 	# size our viewport for the first time 
 	resize()
@@ -55,9 +57,11 @@ func _ready():
 func _process(delta):
 	var text = ""
 
-		# Test for escape to close application
+	# Test for escape to close application, space to reset our reference frame
 	if (Input.is_key_pressed(KEY_ESCAPE)):
 		get_tree().quit()
+	elif (Input.is_key_pressed(KEY_SPACE)):
+		ArVrServer.request_reference_frame(true, false)
 	
 	# Need to handle controllers, note that we'll add some handy spatial nodes soon that allow you to automate some of this..
 	var idx = 0
@@ -66,19 +70,8 @@ func _process(delta):
 		if (tracker.get_type() == ArVrServer.TRACKER_HMD):
 			# we no longer apply the tracker to our node
 
-			# we do however check if we have location tracking
-			if (tracker.get_tracks_position()):
-				# our position tracking will deal with this
-				camera.translation = Vector3(0.0, 0.0, 0.0)
-			else:
-				camera.translation = Vector3(0.0, 1.85, 0.0)
-
-			# just for debugging
-			var tform = Transform()
-			if (tracker.get_tracks_orientation()):
-				tform.basis = tracker.get_orientation()
-			if (tracker.get_tracks_position()):
-				tform.origin = tracker.get_position()
+			# just for debugging, our camera is repositioned automatically
+			var tform = tracker.get_transform(true)
 			text += "HMD transform: " + str(tform) + "\n"
 
 		elif (tracker.get_type() == ArVrServer.TRACKER_CONTROLLER):
@@ -92,19 +85,11 @@ func _process(delta):
 				controller.set_joy_id(tracker.get_joy_id())
 				vr_origin.add_child(controller)
 			
-			var tform = controller.get_transform()
-
-			# apply orientation
-			if (tracker.get_tracks_orientation()):
-				tform.basis = tracker.get_orientation()
-				
-			# apply positioning
-			if (tracker.get_tracks_position()):
-				tform.origin = tracker.get_position()
-			
+			# we'll be adding a special spatial node for this soon
+			var tform = tracker.get_transform(true)
 			text += name + " transform: " + str(tform) + "\n"
-			
 			controller.set_transform(tform)
+		
 		idx = idx + 1
 	
 	# Now that we've updated all the locations of our controllers we can implement some game logic around it....
