@@ -30,6 +30,7 @@ func _ready():
 	# find an arvr interface, some day make this user selectable, for now just use the last one (likely openvr)
 	if (ArVrServer.get_interface_count() > 0):
 		arvr_interface = ArVrServer.get_interface(ArVrServer.get_interface_count() - 1)
+#		arvr_interface = ArVrServer.get_interface(0)
 		if (arvr_interface.initialize()):
 			# set viewport to VR mode, our ar/vr server will be in control of our output
 			get_viewport().set_use_arvr(true)
@@ -64,13 +65,22 @@ func _process(delta):
 		var tracker = ArVrServer.get_tracker(idx)
 		if (tracker.get_type() == ArVrServer.TRACKER_HMD):
 			# we no longer apply the tracker to our node
-			
+
 			# we do however check if we have location tracking
 			if (tracker.get_tracks_position()):
 				# our position tracking will deal with this
 				camera.translation = Vector3(0.0, 0.0, 0.0)
 			else:
 				camera.translation = Vector3(0.0, 1.85, 0.0)
+
+			# just for debugging
+			var tform = Transform()
+			if (tracker.get_tracks_orientation()):
+				tform.basis = tracker.get_orientation()
+			if (tracker.get_tracks_position()):
+				tform.origin = tracker.get_position()
+			text += "HMD transform: " + str(tform) + "\n"
+
 		elif (tracker.get_type() == ArVrServer.TRACKER_CONTROLLER):
 			var name = tracker.get_name()
 			var controller = null
@@ -101,4 +111,4 @@ func _process(delta):
 	# not in this demo though, well not yet ;)
 		
 	# debugging....
-#	$DebugText.set_text(text)
+	$DebugText.set_text(text)

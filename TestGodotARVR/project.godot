@@ -1,10 +1,15 @@
+config_version=3
 [application]
 
-icon="res://icon.png"
-main_scene="res://main.tscn"
 name="GodotVR Demo"
+main_scene="res://main.tscn"
+icon="res://icon.png"
 
 [display]
 
 window/use_vsync=false
+window/fullscreen=true
 
+[memory]
+
+multithread/thread_rid_pool_prealloc=60

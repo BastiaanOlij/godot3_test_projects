@@ -153,11 +153,11 @@ v_offset = 0.0
 
 [node name="DebugText" type="Label" parent="."]
 
-visible = false
-margin_left = 3.0
-margin_top = 63.0
-margin_right = 489.0
-margin_bottom = 267.0
+margin_left = 9.0
+margin_top = 29.0
+margin_right = 495.0
+margin_bottom = 233.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 0
@@ -169,8 +169,11 @@ max_lines_visible = -1
 
 [node name="Using" type="Label" parent="."]
 
-margin_right = 283.0
-margin_bottom = 55.0
+margin_left = 7.0
+margin_top = 6.0
+margin_right = 290.0
+margin_bottom = 61.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 size_flags_vertical = 0
