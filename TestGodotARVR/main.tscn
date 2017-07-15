@@ -138,11 +138,12 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 
 [node name="VR_Origin" type="ARVROrigin" parent="."]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0 )
+world_scale = 1.0
 _sections_unfolded = [ "Transform" ]
 
 [node name="Camera" type="ARVRCamera" parent="VR_Origin"]
 
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0 )
 projection = 0
 fov = 60.0
 near = 0.1
@@ -172,6 +173,7 @@ margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
+size_flags_horizontal = 1
 size_flags_vertical = 0
 text = "Using"
 percent_visible = 1.0
