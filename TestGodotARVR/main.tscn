@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://Bar/starship_bar_economy_class-1.1.scn" type="PackedScene" id=2]
+[ext_resource path="res://Controllers/vive_controller/vive_controller.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -92,7 +93,7 @@ glow_intensity = 0.8
 glow_strength = 1.0
 glow_bloom = 0.0
 glow_blend_mode = 2
-glow_hdr_treshold = 1.0
+glow_hdr_threshold = 1.0
 glow_hdr_scale = 2.0
 glow_bicubic_upscale = false
 adjustment_enabled = false
@@ -135,13 +136,14 @@ environment = SubResource( 2 )
 
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 
-[node name="VR_Origin" type="Spatial" parent="."]
+[node name="VR_Origin" type="ARVROrigin" parent="."]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0 )
+world_scale = 1.0
 _sections_unfolded = [ "Transform" ]
 
-[node name="Camera" type="Camera" parent="VR_Origin"]
+[node name="Camera" type="ARVRCamera" parent="VR_Origin"]
 
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0 )
 projection = 0
 fov = 60.0
 near = 0.1
@@ -154,21 +156,13 @@ h_offset = 0.0
 v_offset = 0.0
 _sections_unfolded = [ "Transform" ]
 
-[node name="DebugText" type="Label" parent="."]
+[node name="Controller 1" parent="VR_Origin" instance=ExtResource( 3 )]
 
-margin_left = 9.0
-margin_top = 29.0
-margin_right = 495.0
-margin_bottom = 233.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "This is a test"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+controller_id = 1
+
+[node name="Controller 2" parent="VR_Origin" instance=ExtResource( 3 )]
+
+controller_id = 2
 
 [node name="Using" type="Label" parent="."]
 
@@ -179,6 +173,7 @@ margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
+size_flags_horizontal = 1
 size_flags_vertical = 0
 text = "Using"
 percent_visible = 1.0
