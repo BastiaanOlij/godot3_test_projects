@@ -1,9 +1,21 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+; 
+; Format: 
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=3
+
 [application]
 
-name="Test3"
+config/name="Test Primitives"
+run/main_scene="res://main.tscn"
+name="Test Primitives"
 main_scene="res://main.tscn"
 icon="res://icon.png"
+run/icon="res://icon.png"
 
 [memory]
 
