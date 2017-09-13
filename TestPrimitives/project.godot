@@ -17,6 +17,10 @@ main_scene="res://main.tscn"
 icon="res://icon.png"
 run/icon="res://icon.png"
 
+[gdnative]
+
+singletons=[  ]
+
 [memory]
 
 multithread/thread_rid_pool_prealloc=60
