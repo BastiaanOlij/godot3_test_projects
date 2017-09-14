@@ -43,3 +43,14 @@ func _process(delta):
 		get_tree().quit()
 	elif (Input.is_key_pressed(KEY_SPACE)):
 		ARVRServer.request_reference_frame(true, false)
+
+	if (Input.is_key_pressed(KEY_LEFT)):
+		$VR_Origin.rotation.y += delta
+	elif (Input.is_key_pressed(KEY_RIGHT)):
+		$VR_Origin.rotation.y -= delta
+
+	if (Input.is_key_pressed(KEY_UP)):
+		$VR_Origin.translation -= $VR_Origin.transform.basis.z * delta;
+	elif (Input.is_key_pressed(KEY_DOWN)):
+		$VR_Origin.translation += $VR_Origin.transform.basis.z * delta;
+		
