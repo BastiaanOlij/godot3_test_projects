@@ -4,11 +4,12 @@
 
 [sub_resource type="Environment" id=1]
 
-background_mode = 0
+background_mode = 6
 background_sky_scale = 1.0
 background_color = Color( 0, 0, 0, 1 )
 background_energy = 1.0
 background_canvas_max_layer = 0
+background_camera_feed_id = 1
 ambient_light_color = Color( 0, 0, 0, 1 )
 ambient_light_energy = 1.0
 ambient_light_sky_contribution = 0.0
@@ -123,6 +124,7 @@ camera_active = false
 
 [sub_resource type="ShaderMaterial" id=6]
 
+render_priority = 0
 shader = SubResource( 3 )
 shader_param/color_Y = SubResource( 5 )
 shader_param/color_CbCr = SubResource( 4 )
@@ -167,7 +169,6 @@ shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_bias = 1.0
 shadow_contact = 0.0
-shadow_max_distance = 200.0
 shadow_reverse_cull_face = false
 editor_only = false
 directional_shadow_mode = 2
@@ -176,6 +177,9 @@ directional_shadow_split_2 = 0.2
 directional_shadow_split_3 = 0.5
 directional_shadow_blend_splits = false
 directional_shadow_normal_bias = 0.2
+directional_shadow_bias_split_scale = 0.25
+directional_shadow_depth_range = 0
+directional_shadow_max_distance = 200.0
 
 [node name="Cube" type="MeshInstance" parent="."]
 
@@ -184,7 +188,6 @@ layers = 1
 material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
-visible_in_all_rooms = false
 use_in_baked_light = false
 lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
@@ -197,11 +200,11 @@ material/0 = null
 [node name="Plane" type="MeshInstance" parent="."]
 
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.26068, 0, -2.13202 )
+visible = false
 layers = 1
 material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
-visible_in_all_rooms = false
 use_in_baked_light = false
 lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
