@@ -1,6 +1,18 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+; 
+; Format: 
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=3
+
 [application]
 
+config/name="GodotVR Demo"
+run/main_scene="res://main.tscn"
+config/icon="res://icon.png"
 name="GodotVR Demo"
 main_scene="res://main.tscn"
 icon="res://icon.png"
@@ -9,6 +21,10 @@ icon="res://icon.png"
 
 window/use_vsync=false
 window/fullscreen=true
+
+[gdnative]
+
+singletons=[  ]
 
 [memory]
 
