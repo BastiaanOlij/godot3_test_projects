@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://anchor.gd" type="Script" id=2]
@@ -11,11 +11,12 @@
 
 [sub_resource type="Environment" id=1]
 
-background_mode = 1
+background_mode = 6
 background_sky_scale = 1.0
 background_color = Color( 0, 1, 0, 1 )
 background_energy = 0.0
 background_canvas_max_layer = 0
+background_camera_feed_id = 1
 ambient_light_color = Color( 0.671875, 0.671875, 0.671875, 1 )
 ambient_light_energy = 1.0
 ambient_light_sky_contribution = 0.0
@@ -88,11 +89,13 @@ _sections_unfolded = [ "Ambient Light", "Background" ]
 
 [sub_resource type="SpatialMaterial" id=2]
 
+render_priority = 0
 flags_transparent = true
 flags_unshaded = false
 flags_vertex_lighting = false
-flags_on_top = false
+flags_no_depth_test = false
 flags_use_point_size = false
+flags_world_triplanar = false
 flags_fixed_size = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
@@ -105,6 +108,7 @@ params_line_width = 1.0
 params_point_size = 1.0
 params_billboard_mode = 0
 params_grow = false
+params_use_alpha_scissor = false
 albedo_color = Color( 0.7, 0.7, 0.7, 0.336078 )
 metallic = 0.1
 metallic_specular = 0.5
@@ -119,6 +123,7 @@ anisotropy_enabled = false
 ao_enabled = false
 depth_enabled = false
 subsurf_scatter_enabled = false
+transmission_enabled = false
 refraction_enabled = false
 detail_enabled = false
 uv1_scale = Vector3( 1, 1, 1 )
@@ -129,6 +134,9 @@ uv2_scale = Vector3( 1, 1, 1 )
 uv2_offset = Vector3( 0, 0, 0 )
 uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Flags", "Parameters" ]
 
 [sub_resource type="PlaneMesh" id=3]
@@ -140,11 +148,13 @@ subdivide_depth = 0
 
 [sub_resource type="SpatialMaterial" id=4]
 
+render_priority = 0
 flags_transparent = false
 flags_unshaded = true
 flags_vertex_lighting = false
-flags_on_top = false
+flags_no_depth_test = false
 flags_use_point_size = false
+flags_world_triplanar = false
 flags_fixed_size = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
@@ -157,6 +167,7 @@ params_line_width = 1.0
 params_point_size = 1.0
 params_billboard_mode = 0
 params_grow = false
+params_use_alpha_scissor = false
 albedo_color = Color( 0.976562, 0.976562, 0.976562, 1 )
 albedo_texture = ExtResource( 4 )
 metallic = 0.1
@@ -172,6 +183,7 @@ anisotropy_enabled = false
 ao_enabled = false
 depth_enabled = false
 subsurf_scatter_enabled = false
+transmission_enabled = false
 refraction_enabled = false
 detail_enabled = false
 uv1_scale = Vector3( 1, 1, 1 )
@@ -182,15 +194,20 @@ uv2_scale = Vector3( 1, 1, 1 )
 uv2_offset = Vector3( 0, 0, 0 )
 uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Depth", "Flags", "NormalMap", "Parameters" ]
 
 [sub_resource type="SpatialMaterial" id=5]
 
+render_priority = 0
 flags_transparent = false
 flags_unshaded = false
 flags_vertex_lighting = false
-flags_on_top = false
+flags_no_depth_test = false
 flags_use_point_size = false
+flags_world_triplanar = false
 flags_fixed_size = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
@@ -203,7 +220,8 @@ params_line_width = 1.0
 params_point_size = 1.0
 params_billboard_mode = 0
 params_grow = false
-albedo_color = Color( 0.889333, 0.887961, 0.901216, 1 )
+params_use_alpha_scissor = false
+albedo_color = Color( 0.889333, 0.887961, 0.901216, 0.587294 )
 metallic = 0.1
 metallic_specular = 0.5
 metallic_texture_channel = 0
@@ -217,6 +235,7 @@ anisotropy_enabled = false
 ao_enabled = false
 depth_enabled = false
 subsurf_scatter_enabled = false
+transmission_enabled = false
 refraction_enabled = false
 detail_enabled = false
 uv1_scale = Vector3( 1, 1, 1 )
@@ -227,14 +246,20 @@ uv2_scale = Vector3( 1, 1, 1 )
 uv2_offset = Vector3( 0, 0, 0 )
 uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
 
 [sub_resource type="SpatialMaterial" id=6]
 
-flags_transparent = false
+render_priority = 0
+flags_transparent = true
 flags_unshaded = false
 flags_vertex_lighting = false
-flags_on_top = false
+flags_no_depth_test = false
 flags_use_point_size = false
+flags_world_triplanar = false
 flags_fixed_size = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
@@ -247,6 +272,7 @@ params_line_width = 1.0
 params_point_size = 1.0
 params_billboard_mode = 0
 params_grow = false
+params_use_alpha_scissor = false
 albedo_color = Color( 0.376367, 0.532996, 0.734375, 1 )
 metallic = 0.1
 metallic_specular = 0.5
@@ -261,6 +287,7 @@ anisotropy_enabled = false
 ao_enabled = false
 depth_enabled = false
 subsurf_scatter_enabled = false
+transmission_enabled = false
 refraction_enabled = false
 detail_enabled = false
 uv1_scale = Vector3( 1, 1, 1 )
@@ -271,15 +298,20 @@ uv2_scale = Vector3( 1, 1, 1 )
 uv2_offset = Vector3( 0, 0, 0 )
 uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
-_sections_unfolded = [ "Albedo" ]
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
 
 [sub_resource type="SpatialMaterial" id=7]
 
+render_priority = 0
 flags_transparent = false
 flags_unshaded = false
 flags_vertex_lighting = false
-flags_on_top = false
+flags_no_depth_test = false
 flags_use_point_size = false
+flags_world_triplanar = false
 flags_fixed_size = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
@@ -292,6 +324,7 @@ params_line_width = 1.0
 params_point_size = 1.0
 params_billboard_mode = 0
 params_grow = false
+params_use_alpha_scissor = false
 albedo_color = Color( 0.34375, 0.34375, 0.34375, 1 )
 metallic = 0.1
 metallic_specular = 0.5
@@ -306,6 +339,7 @@ anisotropy_enabled = false
 ao_enabled = false
 depth_enabled = false
 subsurf_scatter_enabled = false
+transmission_enabled = false
 refraction_enabled = false
 detail_enabled = false
 uv1_scale = Vector3( 1, 1, 1 )
@@ -316,15 +350,20 @@ uv2_scale = Vector3( 1, 1, 1 )
 uv2_offset = Vector3( 0, 0, 0 )
 uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
 _sections_unfolded = [ "Albedo" ]
 
 [sub_resource type="SpatialMaterial" id=8]
 
-flags_transparent = false
+render_priority = 0
+flags_transparent = true
 flags_unshaded = false
 flags_vertex_lighting = false
-flags_on_top = false
+flags_no_depth_test = false
 flags_use_point_size = false
+flags_world_triplanar = false
 flags_fixed_size = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
@@ -337,7 +376,8 @@ params_line_width = 1.0
 params_point_size = 1.0
 params_billboard_mode = 0
 params_grow = false
-albedo_color = Color( 1, 1, 1, 1 )
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 0.654784 )
 albedo_texture = ExtResource( 5 )
 metallic = 0.59
 metallic_specular = 0.5
@@ -354,6 +394,7 @@ anisotropy_flowmap = ExtResource( 6 )
 ao_enabled = false
 depth_enabled = false
 subsurf_scatter_enabled = false
+transmission_enabled = false
 refraction_enabled = false
 detail_enabled = false
 uv1_scale = Vector3( 1, 1, 1 )
@@ -364,15 +405,20 @@ uv2_scale = Vector3( 1, 1, 1 )
 uv2_offset = Vector3( 0, 0, 0 )
 uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
-_sections_unfolded = [ "Albedo", "Anisotropy", "Clearcoat", "Metallic", "NormalMap", "Roughness" ]
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Anisotropy", "Clearcoat", "Flags", "Metallic", "NormalMap", "Roughness" ]
 
 [sub_resource type="SpatialMaterial" id=9]
 
-flags_transparent = false
+render_priority = 0
+flags_transparent = true
 flags_unshaded = false
 flags_vertex_lighting = false
-flags_on_top = false
+flags_no_depth_test = false
 flags_use_point_size = false
+flags_world_triplanar = false
 flags_fixed_size = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
@@ -385,6 +431,59 @@ params_line_width = 1.0
 params_point_size = 1.0
 params_billboard_mode = 0
 params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 0.889333, 0.887961, 0.901216, 0.698392 )
+metallic = 0.1
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=10]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
 albedo_color = Color( 0.7, 0.7, 0.7, 1 )
 albedo_texture = ExtResource( 7 )
 metallic = 0.1
@@ -405,6 +504,7 @@ depth_min_layers = 8
 depth_max_layers = 32
 depth_texture = ExtResource( 8 )
 subsurf_scatter_enabled = false
+transmission_enabled = false
 refraction_enabled = false
 detail_enabled = false
 uv1_scale = Vector3( 1, 1, 1 )
@@ -415,6 +515,9 @@ uv2_scale = Vector3( 1, 1, 1 )
 uv2_offset = Vector3( 0, 0, 0 )
 uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Depth" ]
 
 [node name="Main" type="Spatial"]
@@ -453,7 +556,6 @@ layers = 1
 material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
-visible_in_all_rooms = false
 use_in_baked_light = false
 lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
@@ -477,7 +579,7 @@ shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_bias = 1.0
 shadow_contact = 0.0
-shadow_max_distance = 200.0
+shadow_reverse_cull_face = false
 editor_only = false
 directional_shadow_mode = 2
 directional_shadow_split_1 = 0.1
@@ -485,6 +587,9 @@ directional_shadow_split_2 = 0.2
 directional_shadow_split_3 = 0.5
 directional_shadow_blend_splits = false
 directional_shadow_normal_bias = 0.2
+directional_shadow_bias_split_scale = 0.25
+directional_shadow_depth_range = 0
+directional_shadow_max_distance = 200.0
 
 [node name="OmniLight" type="OmniLight" parent="."]
 
@@ -499,7 +604,7 @@ shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_bias = 0.15
 shadow_contact = 0.0
-shadow_max_distance = 0.0
+shadow_reverse_cull_face = false
 editor_only = false
 omni_range = 5.0
 omni_attenuation = 1.0
@@ -518,7 +623,6 @@ layers = 1
 material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
-visible_in_all_rooms = false
 use_in_baked_light = false
 lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
@@ -539,7 +643,6 @@ layers = 1
 material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
-visible_in_all_rooms = false
 use_in_baked_light = false
 lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
@@ -548,7 +651,7 @@ lod_max_hysteresis = 0.0
 mesh = ExtResource( 3 )
 skeleton = NodePath("..")
 material/0 = SubResource( 8 )
-material/1 = SubResource( 5 )
+material/1 = SubResource( 9 )
 material/2 = SubResource( 6 )
 material/3 = SubResource( 7 )
 _sections_unfolded = [ "Transform", "Visibility", "material" ]
@@ -560,7 +663,6 @@ layers = 1
 material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
-visible_in_all_rooms = false
 use_in_baked_light = false
 lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
@@ -568,7 +670,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = ExtResource( 3 )
 skeleton = NodePath("..")
-material/0 = SubResource( 9 )
+material/0 = SubResource( 10 )
 material/1 = SubResource( 5 )
 material/2 = SubResource( 6 )
 material/3 = SubResource( 7 )
@@ -576,6 +678,10 @@ _sections_unfolded = [ "Transform", "Visibility", "material" ]
 
 [node name="toggle_plane_detection" type="Button" parent="."]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 164.0
 margin_bottom = 34.0
 rect_pivot_offset = Vector2( 0, 0 )
