@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/DroidSerif-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="Environment" id=1]
 
@@ -137,6 +138,15 @@ size = Vector2( 3.2, 1.8 )
 subdivide_width = 0
 subdivide_depth = 0
 
+[sub_resource type="DynamicFont" id=8]
+
+resource_name = "LargeDroid"
+size = 48
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Resource", "Settings" ]
+
 [node name="Spatial" type="Spatial"]
 
 script = ExtResource( 1 )
@@ -214,5 +224,56 @@ mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
+
+[node name="FPS" type="Label" parent="."]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 16.0
+margin_top = 86.0
+margin_right = 201.0
+margin_bottom = 143.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 8 )
+text = "FPS"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Size Flags", "custom_fonts" ]
+
+[node name="CameraFeeds" type="OptionButton" parent="."]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 13.0
+margin_top = 15.0
+margin_right = 661.0
+margin_bottom = 78.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 8 )
+toggle_mode = false
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
+group = null
+flat = true
+align = 0
+selected = -1
+items = [  ]
+_sections_unfolded = [ "Anchor", "Size Flags", "custom_fonts" ]
+
+[connection signal="item_selected" from="CameraFeeds" to="." method="_on_CameraFeeds_item_selected"]
 
 
