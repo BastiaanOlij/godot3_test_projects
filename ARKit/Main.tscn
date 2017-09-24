@@ -17,6 +17,8 @@ background_color = Color( 0, 1, 0, 1 )
 background_energy = 0.0
 background_canvas_max_layer = 0
 background_camera_feed_id = 1
+background_camera_feed_h_flip = false
+background_camera_feed_v_flip = true
 ambient_light_color = Color( 0.671875, 0.671875, 0.671875, 1 )
 ambient_light_energy = 1.0
 ambient_light_sky_contribution = 0.0
@@ -684,6 +686,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 164.0
 margin_bottom = 34.0
+rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -695,6 +698,29 @@ shortcut = null
 group = null
 text = "Plane detection on"
 flat = false
+_sections_unfolded = [ "Rect" ]
+
+[node name="Info" type="Label" parent="."]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 2.0
+margin_top = 87.0
+margin_right = 505.0
+margin_bottom = 147.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "FPS"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Material", "Rect", "Size Flags", "Visibility" ]
 
 [connection signal="pressed" from="toggle_plane_detection" to="." method="_on_toggle_plane_detection"]
 
