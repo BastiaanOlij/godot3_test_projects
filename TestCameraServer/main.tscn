@@ -1,14 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/DroidSerif-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="Environment" id=1]
 
-background_mode = 0
+background_mode = 6
 background_sky_scale = 1.0
 background_color = Color( 0, 0, 0, 1 )
 background_energy = 1.0
 background_canvas_max_layer = 0
+background_camera_feed_id = 1
 ambient_light_color = Color( 0, 0, 0, 1 )
 ambient_light_energy = 1.0
 ambient_light_sky_contribution = 0.0
@@ -86,54 +88,14 @@ subdivide_width = 0
 subdivide_height = 0
 subdivide_depth = 0
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="DynamicFont" id=3]
 
-code = "shader_type spatial;
-
-uniform sampler2D color_Y;
-uniform sampler2D color_CbCr;
-
-void fragment() {
-	mat4 ycbcrToRGBTransform = mat4(
-		vec4( 1.0000,  1.0000,  1.0000,  0.0000),
-		vec4( 0.0000, -0.3441,  1.7720,  0.0000),
-		vec4( 1.4020, -0.7141,  0.0000,  0.0000),
-		vec4(-0.7010,  0.5291, -0.8860,  1.0000)
-	);
-
-	vec2 flip_UV = vec2(UV.x, 1.0 - UV.y);
-	float Y = texture(color_Y, flip_UV).r;
-	vec2 CbCr = texture(color_CbCr, flip_UV).rg;
-	ALBEDO = (ycbcrToRGBTransform * vec4(Y, CbCr.r, CbCr.y, 1.0)).rgb;
-	ALPHA = 1.0;
-}
-"
-
-[sub_resource type="CameraFeedTexture" id=4]
-
-camera_id = 1
-feed_texture = 1
-camera_active = false
-
-[sub_resource type="CameraFeedTexture" id=5]
-
-camera_id = 1
-feed_texture = 0
-camera_active = false
-
-[sub_resource type="ShaderMaterial" id=6]
-
-shader = SubResource( 3 )
-shader_param/color_Y = SubResource( 5 )
-shader_param/color_CbCr = SubResource( 4 )
-_sections_unfolded = [ "Resource", "shader_param" ]
-
-[sub_resource type="PlaneMesh" id=7]
-
-material = SubResource( 6 )
-size = Vector2( 3.2, 1.8 )
-subdivide_width = 0
-subdivide_depth = 0
+resource_name = "LargeDroid"
+size = 48
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Resource", "Settings" ]
 
 [node name="Spatial" type="Spatial"]
 
@@ -167,7 +129,6 @@ shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_bias = 1.0
 shadow_contact = 0.0
-shadow_max_distance = 200.0
 shadow_reverse_cull_face = false
 editor_only = false
 directional_shadow_mode = 2
@@ -176,6 +137,9 @@ directional_shadow_split_2 = 0.2
 directional_shadow_split_3 = 0.5
 directional_shadow_blend_splits = false
 directional_shadow_normal_bias = 0.2
+directional_shadow_bias_split_scale = 0.25
+directional_shadow_depth_range = 0
+directional_shadow_max_distance = 200.0
 
 [node name="Cube" type="MeshInstance" parent="."]
 
@@ -184,7 +148,6 @@ layers = 1
 material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
-visible_in_all_rooms = false
 use_in_baked_light = false
 lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
@@ -194,22 +157,55 @@ mesh = SubResource( 2 )
 skeleton = NodePath("..")
 material/0 = null
 
-[node name="Plane" type="MeshInstance" parent="."]
+[node name="FPS" type="Label" parent="."]
 
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.26068, 0, -2.13202 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-visible_in_all_rooms = false
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 7 )
-skeleton = NodePath("..")
-material/0 = null
-_sections_unfolded = [ "Transform" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 16.0
+margin_top = 86.0
+margin_right = 201.0
+margin_bottom = 143.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
+text = "FPS"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Size Flags", "custom_fonts" ]
+
+[node name="CameraFeeds" type="OptionButton" parent="."]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 13.0
+margin_top = 15.0
+margin_right = 661.0
+margin_bottom = 78.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 3 )
+toggle_mode = false
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
+group = null
+flat = true
+align = 0
+selected = -1
+items = [  ]
+_sections_unfolded = [ "Anchor", "Size Flags", "custom_fonts" ]
+
+[connection signal="item_selected" from="CameraFeeds" to="." method="_on_CameraFeeds_item_selected"]
 
 
