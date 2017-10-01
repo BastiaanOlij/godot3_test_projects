@@ -12,7 +12,7 @@
 [sub_resource type="Environment" id=1]
 
 background_mode = 6
-background_sky_scale = 1.0
+background_sky_custom_fov = 0.0
 background_color = Color( 0, 1, 0, 1 )
 background_energy = 0.0
 background_canvas_max_layer = 0
@@ -570,7 +570,7 @@ _sections_unfolded = [ "Geometry", "Transform" ]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 
-transform = Transform( 0.889128, -0.397182, 0.227369, 0, 0.496811, 0.867859, -0.457658, -0.771638, 0.441729, 7.15977, 2.4405, -3.31809 )
+transform = Transform( 0.623013, -0.733525, 0.271654, 0.321394, 0.55667, 0.766044, -0.713134, -0.389948, 0.582563, 7.15977, 2.4405, -3.31809 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -613,12 +613,13 @@ omni_attenuation = 1.0
 omni_shadow_mode = 1
 omni_shadow_detail = 1
 
-[node name="GodotBall" type="Spatial" parent="."]
+[node name="GodotBalls" type="Spatial" parent="."]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.113044, -0.5 )
+visible = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="WoodBall" type="MeshInstance" parent="GodotBall"]
+[node name="WoodBall" type="MeshInstance" parent="GodotBalls"]
 
 transform = Transform( 0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, -0.134659, 0, 0 )
 layers = 1
@@ -638,7 +639,7 @@ material/2 = SubResource( 6 )
 material/3 = SubResource( 7 )
 _sections_unfolded = [ "Transform", "Visibility", "material" ]
 
-[node name="Alu" type="MeshInstance" parent="GodotBall"]
+[node name="Alu" type="MeshInstance" parent="GodotBalls"]
 
 transform = Transform( 0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.122902, 0, 0 )
 layers = 1
@@ -658,7 +659,7 @@ material/2 = SubResource( 6 )
 material/3 = SubResource( 7 )
 _sections_unfolded = [ "Transform", "Visibility", "material" ]
 
-[node name="Wool" type="MeshInstance" parent="GodotBall"]
+[node name="Wool" type="MeshInstance" parent="GodotBalls"]
 
 transform = Transform( 0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, -0.00747508, 0, 0 )
 layers = 1

@@ -10,7 +10,7 @@ func _ready():
 		print("Found ARKit")
 		arkit.initialize()
 		
-		arkit.set_plane_detection_is_enabled(true)
+		arkit.ar_is_anchor_detection_enabled = true
 		get_node("toggle_plane_detection").set_text("Turn plane detection off")
 		
 		get_viewport().arvr = true
@@ -21,11 +21,11 @@ func _ready():
 
 func _on_toggle_plane_detection():
 	if arkit:
-		if (arkit.get_plane_detection_is_enabled()):
-			arkit.set_plane_detection_is_enabled(false)
+		if (arkit.ar_is_anchor_detection_enabled):
+			arkit.ar_is_anchor_detection_enabled = false
 			get_node("toggle_plane_detection").set_text("Turn plane detection on")
 		else:
-			arkit.set_plane_detection_is_enabled(true)
+			arkit.ar_is_anchor_detection_enabled = true
 			get_node("toggle_plane_detection").set_text("Turn plane detection off")
 			
 func _process(delta):
@@ -45,3 +45,19 @@ func _process(delta):
 			info_text += "Unknown tracking status\n"
 			
 	$Info.text = info_text
+
+func _input(event):
+	# we only check our first anchor
+	var anchor = get_node("ARVROrigin/ARVRAnchor")
+	
+	if (event.is_class("InputEventMouseButton") and event.pressed and anchor.get_is_active()):
+		var camera = get_node("ARVROrigin/ARVRCamera")
+		var from = camera.project_ray_origin(event.position)
+		var direction = camera.project_ray_normal(event.position)
+		
+		var plane = Plane(anchor.translation, anchor.translation + anchor.transform.basis.x, anchor.translation + anchor.transform.basis.z)
+		var intersect = plane.intersects_ray(from, direction)
+		if intersect:
+			$GodotBalls.translation = intersect
+			$GodotBalls.visible = true
+		
