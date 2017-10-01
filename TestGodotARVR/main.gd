@@ -22,6 +22,10 @@ func _ready():
 			# set viewport to VR mode, our ar/vr server will be in control of our output
 			get_viewport().set_use_arvr(true)
 			
+			# work around short coming in openvr, it does not like our 16bit per color channel HDR buffers
+			if arvr_interface.get_name() == 'OpenVR':
+				get_viewport().hdr = false
+			
 			# reset to our initial reference frame. This will center our HMD to our origin point.
 			# ARVRServer.request_reference_frame(true, false)
 			
@@ -43,14 +47,14 @@ func _process(delta):
 		get_tree().quit()
 	elif (Input.is_key_pressed(KEY_SPACE)):
 		ARVRServer.request_reference_frame(true, false)
-
+	
 	if (Input.is_key_pressed(KEY_LEFT)):
-		$VR_Origin.rotation.y += delta
+		vr_origin.rotation.y += delta
 	elif (Input.is_key_pressed(KEY_RIGHT)):
-		$VR_Origin.rotation.y -= delta
+		vr_origin.rotation.y -= delta
 
 	if (Input.is_key_pressed(KEY_UP)):
-		$VR_Origin.translation -= $VR_Origin.transform.basis.z * delta;
+		vr_origin.translation -= vr_origin.transform.basis.z * delta;
 	elif (Input.is_key_pressed(KEY_DOWN)):
-		$VR_Origin.translation += $VR_Origin.transform.basis.z * delta;
+		vr_origin.translation += vr_origin.transform.basis.z * delta;
 		
