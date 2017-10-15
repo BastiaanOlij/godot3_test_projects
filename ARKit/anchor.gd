@@ -12,4 +12,4 @@ func _process(delta):
 		visible = false
 	elif visible == false:
 		visible = true
-		get_node("../../GodotBall").translation = translation
+#		get_node("../../GodotBalls").translation = translation

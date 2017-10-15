@@ -137,7 +137,7 @@ environment = SubResource( 2 )
 
 [node name="starship_bar_economy_class-1.1" parent="." instance=ExtResource( 2 )]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0396619, -1.35513, -0.57827 )
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Using" type="Label" parent="."]
@@ -162,7 +162,6 @@ max_lines_visible = -1
 
 [node name="VR_Origin" type="ARVROrigin" parent="."]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182014, 1.94474, 0 )
 world_scale = 1.0
 _sections_unfolded = [ "Transform" ]
 
