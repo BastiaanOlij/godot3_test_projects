@@ -15,24 +15,27 @@ func _ready():
 	camera = get_node("VR_Origin/Camera")
 	
 	# find an arvr interface, some day make this user selectable, for now just use the last one (likely openvr)
-	if (ARVRServer.get_interface_count() > 0):
-		arvr_interface = ARVRServer.get_interface(ARVRServer.get_interface_count() - 1)
-#		arvr_interface = ARVRServer.get_interface(0)
-		if (arvr_interface.initialize()):
-			# set viewport to VR mode, our ar/vr server will be in control of our output
-			get_viewport().set_use_arvr(true)
+	arvr_interface = ARVRServer.find_interface("OpenVR")
+	if (arvr_interface and arvr_interface.initialize()):
+		# set viewport to VR mode, our ar/vr server will be in control of our output
+		get_viewport().set_use_arvr(true)
+		
+		# work around short coming in openvr, it does not like our 16bit per color channel HDR buffers
+		if arvr_interface.get_name() == 'OpenVR':
+			get_viewport().hdr = false
+
+		if arvr_interface.get_name() == 'OpenHMD':
+			arvr_interface.init_tracking_device(1);
+			arvr_interface.init_controller_device(2);
+			arvr_interface.init_controller_device(3);
 			
-			# work around short coming in openvr, it does not like our 16bit per color channel HDR buffers
-			if arvr_interface.get_name() == 'OpenVR':
-				get_viewport().hdr = false
+		# reset to our initial reference frame. This will center our HMD to our origin point.
+		# ARVRServer.request_reference_frame(true, false)
 			
-			# reset to our initial reference frame. This will center our HMD to our origin point.
-			# ARVRServer.request_reference_frame(true, false)
-			
-			$Using.text = "Using: " + arvr_interface.get_name()
-		else:
-			arvr_interface = null
-			
+		$Using.text = "Using: " + arvr_interface.get_name()
+	else:
+		arvr_interface = null
+		
 	# couldn't find a VR interface?
 	if (!arvr_interface):
 		# set viewport to normal mode, this will make our screen work as per usual...
