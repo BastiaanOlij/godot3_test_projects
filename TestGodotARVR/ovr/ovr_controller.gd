@@ -1,5 +1,7 @@
 extends ARVRController
 
+signal controller_activated(controller)
+
 var ovr_render_model
 var components = Array()
 
@@ -36,6 +38,7 @@ func _process(delta):
 			
 			# make it visible
 			visible = true
+			emit_signal("controller_activated", self)
 
 func _on_OVRController_button_pressed( button ):
 	print("Button " + str(button) + " was pressed on controller " + get_controller_name())

@@ -32,4 +32,8 @@ _sections_unfolded = [ "Transform" ]
 
 controller_id = 2
 
+[connection signal="controller_activated" from="OVRController1" to="." method="_on_controller_activated"]
+
+[connection signal="controller_activated" from="OVRController2" to="." method="_on_controller_activated"]
+
 

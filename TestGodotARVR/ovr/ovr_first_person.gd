@@ -5,10 +5,20 @@ var turn_step = 0.0
 export var turn_delay = 0.2
 export var turn_angle = 20.0
 
+var left_hand_controller = null
+var right_hand_controller = null
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	pass
+
+func _on_controller_activated( controller ):
+	if controller.get_hand()  == ARVRPositionalTracker.TRACKER_LEFT_HAND:
+		left_hand_controller = controller
+	else:
+		right_hand_controller = controller
+
 
 func _handle_teleport(on_controller):
 	pass
@@ -62,39 +72,23 @@ func _apply_direct_motion(delta, left_right, forwards_backwards):
 func _physics_process(delta):
 	var left_right = 0.0
 	var forwards_backwards = 0.0
-	
-	# get our right hand controller
-	var controller1 = get_node("OVRController1")
-	var	controller2 = get_node("OVRController2")
-	
-	if (controller1.get_is_active() or controller2.get_is_active()):
-		var left_hand_controller = null
-		var right_hand_controller = null
-		
-		if controller1.get_is_active():
-			if controller1.get_hand() == ARVRPositionalTracker.TRACKER_RIGHT_HAND:
-				right_hand_controller = controller1
-			elif controller1.get_hand() == ARVRPositionalTracker.TRACKER_LEFT_HAND:
-				left_hand_controller = controller1
 
-		if controller2.get_is_active():
-			if controller2.get_hand() == ARVRPositionalTracker.TRACKER_RIGHT_HAND:
-				right_hand_controller = controller2
-			elif controller2.get_hand() == ARVRPositionalTracker.TRACKER_LEFT_HAND:
-				left_hand_controller = controller2
-	
-		if left_hand_controller:
+	if left_hand_controller:
+		if left_hand_controller.get_is_active():
 			# implement teleport on left hand..
 			_handle_teleport(left_hand_controller)
 		else:
+			left_hand_controller = null
 			_handle_teleport(null)
-	
-		if right_hand_controller:
+			
+	if right_hand_controller:
+		if right_hand_controller.get_is_active():
 			left_right = right_hand_controller.get_joystick_axis(0)
 			forwards_backwards = right_hand_controller.get_joystick_axis(1)
+		else:
+			right_hand_controller = null
 	else:
 		# add check for gamepad and set left_right/forwards_backwards accordingly
-		
 		pass
 		
 	# apply direct motion
