@@ -20,11 +20,10 @@ icon="res://icon.png"
 [display]
 
 window/use_vsync=false
-window/fullscreen=true
 
 [gdnative]
 
-singletons=[ "res://bin/godot_openvr.tres" ]
+singletons=[ "res://bin/godot_openvr.gdnlib" ]
 
 [memory]
 

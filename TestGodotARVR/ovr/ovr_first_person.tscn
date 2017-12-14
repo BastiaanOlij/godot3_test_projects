@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ovr/ovr_first_person.gd" type="Script" id=1]
+[ext_resource path="res://ovr/ovr_controller.tscn" type="PackedScene" id=2]
+
+[node name="OVRFirstPerson" type="ARVROrigin"]
+
+world_scale = 1.0
+script = ExtResource( 1 )
+turn_delay = 0.2
+turn_angle = 20.0
+
+[node name="ARVRCamera" type="ARVRCamera" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0 )
+projection = 0
+fov = 65.0
+near = 0.1
+far = 100.0
+keep_aspect = 1
+current = false
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler/tracking = 0
+_sections_unfolded = [ "Transform" ]
+
+[node name="OVRController1" parent="." instance=ExtResource( 2 )]
+
+[node name="OVRController2" parent="." instance=ExtResource( 2 )]
+
+controller_id = 2
+
+
