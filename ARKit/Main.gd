@@ -14,6 +14,8 @@ func _ready():
 		get_node("toggle_plane_detection").set_text("Turn plane detection off")
 		
 		get_viewport().arvr = true
+		
+		$ARVROrigin/ARVRCamera.environment.background_camera_feed_id = 1
 	else:
 		print("Couldn't find ARKit")
 		get_node("toggle_plane_detection").set_text("No ARKIT")
