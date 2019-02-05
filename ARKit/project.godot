@@ -19,10 +19,15 @@ config/name="ARKit"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/handheld/orientation="sensor"
+
 [gdnative]
 
 singletons=[  ]
 
 [rendering]
 
+quality/shadows/filter_mode.mobile=1
 environment/default_environment="res://default_env.tres"

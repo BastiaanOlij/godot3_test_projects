@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://anchor.gd" type="Script" id=1]
+[ext_resource path="res://anchor_material.tres" type="Material" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+
+flags_transparent = true
+params_cull_mode = 2
+albedo_color = Color( 0.7, 0.7, 0.7, 0.336078 )
+metallic = 0.1
+roughness = 0.0
+
+[sub_resource type="PlaneMesh" id=2]
+
+material = SubResource( 1 )
+size = Vector2( 1, 1 )
+
+[node name="ARVRAnchor" type="ARVRAnchor"]
+anchor_id = 0
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[connection signal="mesh_updated" from="." to="." method="_on_ARVRAnchor_mesh_updated"]

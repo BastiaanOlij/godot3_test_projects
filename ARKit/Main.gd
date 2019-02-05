@@ -1,8 +1,34 @@
 extends Spatial
 
 var arkit = null
+var anchor = preload("res://Anchor.tscn")
+
+func tracker_added(p_name, p_type, p_id):
+	if p_type == ARVRServer.TRACKER_ANCHOR:
+		var name = "anchor_" + str(p_id)
+		print("Adding " + name + " (" + p_name + ")")
+		
+		var new_anchor = anchor.instance()
+		$ARVROrigin.add_child(new_anchor)
+		new_anchor.anchor_id = p_id
+		new_anchor.name = name
+
+func tracker_removed(p_name, p_type, p_id):
+	if p_type == ARVRServer.TRACKER_ANCHOR:
+		var name = "anchor_" + str(p_id)
+		print("Removing " + name + " (" + p_name + ")")
+
+		var old_anchor = $ARVROrigin.find_node(name, false, false)
+		if old_anchor:
+			$ARVROrigin.remove_child(old_anchor)
+		else:
+			print("Couldn't find " + name)
 
 func _ready():
+	# Register some signals we need
+	ARVRServer.connect("tracker_added", self, "tracker_added")
+	ARVRServer.connect("tracker_removed", self, "tracker_removed")
+	
 	# Called every time the node is added to the scene.
 	# Initialization here
 	arkit = ARVRServer.find_interface('ARKit')
@@ -13,8 +39,11 @@ func _ready():
 		arkit.ar_is_anchor_detection_enabled = true
 		get_node("toggle_plane_detection").set_text("Turn plane detection off")
 		
+		# we're doing AR :)
 		get_viewport().arvr = true
 		
+		# can't we just set this in the environment? doesn't seem to work out of the box
+		# arkit is ALWAYS 1
 		$ARVROrigin/ARVRCamera.environment.background_camera_feed_id = 1
 	else:
 		print("Couldn't find ARKit")
@@ -49,17 +78,19 @@ func _process(delta):
 	$Info.text = info_text
 
 func _input(event):
-	# we only check our first anchor
-	var anchor = get_node("ARVROrigin/ARVRAnchor")
-	
-	if (event.is_class("InputEventMouseButton") and event.pressed and anchor.get_is_active()):
-		var camera = get_node("ARVROrigin/ARVRCamera")
-		var from = camera.project_ray_origin(event.position)
-		var direction = camera.project_ray_normal(event.position)
-		
-		var plane = Plane(anchor.translation, anchor.translation + anchor.transform.basis.x, anchor.translation + anchor.transform.basis.z)
-		var intersect = plane.intersects_ray(from, direction)
-		if intersect:
-			$GodotBalls.translation = intersect
-			$GodotBalls.visible = true
-		
+	if event.is_class("InputEventMouseButton") and event.pressed:
+		# we only check our first anchor
+		for anchor in $ARVROrigin.get_children():
+			if (anchor.is_class("ARVRAnchor")):
+				var camera = get_node("ARVROrigin/ARVRCamera")
+				var from = camera.project_ray_origin(event.position)
+				var direction = camera.project_ray_normal(event.position)
+			
+				var plane = Plane(anchor.translation, anchor.translation + anchor.transform.basis.x, anchor.translation + anchor.transform.basis.z)
+				var intersect = plane.intersects_ray(from, direction)
+				if intersect:
+					intersect.y += 0.01
+					$GodotBalls.translation = intersect
+					$GodotBalls.visible = true
+				
+				return

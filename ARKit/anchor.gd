@@ -1,15 +1,12 @@
 extends ARVRAnchor
 
-# should move this into a subscene so we can add anchors as new ones are registered
+var material = null
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	set_process(true)
+	material = $MeshInstance.get_surface_material(0)
+
+func _on_ARVRAnchor_mesh_updated(mesh):
+	$MeshInstance.mesh = mesh
 	
-func _process(delta):
-	if get_is_active() == false:
-		visible = false
-	elif visible == false:
-		visible = true
-#		get_node("../../GodotBalls").translation = translation
+	# reapply our material
+	$MeshInstance.set_surface_material(0, material)
