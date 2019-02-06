@@ -29,6 +29,9 @@ func _ready():
 	ARVRServer.connect("tracker_added", self, "tracker_added")
 	ARVRServer.connect("tracker_removed", self, "tracker_removed")
 	
+	# Hide our godotballs for now
+	$GodotBalls.visible = false
+	
 	# Called every time the node is added to the scene.
 	# Initialization here
 	arkit = ARVRServer.find_interface('ARKit')
@@ -79,18 +82,20 @@ func _process(delta):
 
 func _input(event):
 	if event.is_class("InputEventMouseButton") and event.pressed:
-		# we only check our first anchor
-		for anchor in $ARVROrigin.get_children():
-			if (anchor.is_class("ARVRAnchor")):
-				var camera = get_node("ARVROrigin/ARVRCamera")
-				var from = camera.project_ray_origin(event.position)
-				var direction = camera.project_ray_normal(event.position)
+		var camera = get_node("ARVROrigin/ARVRCamera")
+		var space = camera.get_world().get_space()
+		var state = PhysicsServer.space_get_direct_state(space)
+		
+		var from = camera.project_ray_origin(event.position)
+		var direction = camera.project_ray_normal(event.position)
+		
+		var result = state.intersect_ray(from, from + (direction * 100.0))
+		if !result.empty():
+			var transform = Transform()
 			
-				var plane = Plane(anchor.translation, anchor.translation + anchor.transform.basis.x, anchor.translation + anchor.transform.basis.z)
-				var intersect = plane.intersects_ray(from, direction)
-				if intersect:
-					intersect.y += 0.01
-					$GodotBalls.translation = intersect
-					$GodotBalls.visible = true
-				
-				return
+			# position at our intersection point
+			transform.origin = result["position"]
+			
+			# and apply to our godot balls
+			$GodotBalls.global_transform = transform
+			$GodotBalls.visible = true

@@ -13,37 +13,37 @@
 background_mode = 6
 background_color = Color( 0, 1, 0, 1 )
 background_energy = 0.0
-ambient_light_color = Color( 0.671875, 0.671875, 0.671875, 1 )
+ambient_light_color = Color( 0.243137, 0.239216, 0.25098, 1 )
 ambient_light_sky_contribution = 0.0
+ss_reflections_enabled = true
 ssao_blur = 1
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=2]
 
 albedo_color = Color( 0.976562, 0.976562, 0.976562, 1 )
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=3]
 
 albedo_color = Color( 0.889333, 0.887961, 0.901216, 0.587294 )
 metallic = 0.1
 roughness = 0.0
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=4]
 
 flags_transparent = true
 albedo_color = Color( 0.376367, 0.532996, 0.734375, 1 )
 metallic = 0.1
 roughness = 0.0
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=5]
 
 albedo_color = Color( 0.34375, 0.34375, 0.34375, 1 )
 metallic = 0.1
 roughness = 0.0
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=6]
 
-flags_transparent = true
 albedo_color = Color( 1, 1, 1, 0.654784 )
 albedo_texture = ExtResource( 4 )
 metallic = 0.59
@@ -52,14 +52,14 @@ anisotropy_enabled = true
 anisotropy = 0.0
 anisotropy_flowmap = ExtResource( 5 )
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=7]
 
 flags_transparent = true
 albedo_color = Color( 0.889333, 0.887961, 0.901216, 0.698392 )
 metallic = 0.1
 roughness = 0.0
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=8]
 
 albedo_color = Color( 0.7, 0.7, 0.7, 1 )
 albedo_texture = ExtResource( 6 )
@@ -92,31 +92,30 @@ directional_shadow_normal_bias = 0.2
 
 [node name="GodotBalls" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.113044, -0.5 )
-visible = false
 
 [node name="WoodBall" type="MeshInstance" parent="GodotBalls"]
 transform = Transform( 0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, -0.134659, 0, 0 )
 mesh = ExtResource( 2 )
-material/0 = SubResource( 4 )
-material/1 = SubResource( 5 )
-material/2 = SubResource( 6 )
-material/3 = SubResource( 7 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+material/2 = SubResource( 4 )
+material/3 = SubResource( 5 )
 
 [node name="Alu" type="MeshInstance" parent="GodotBalls"]
 transform = Transform( 0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.122902, 0, 0 )
 mesh = ExtResource( 2 )
-material/0 = SubResource( 8 )
-material/1 = SubResource( 9 )
-material/2 = SubResource( 6 )
-material/3 = SubResource( 7 )
+material/0 = SubResource( 6 )
+material/1 = SubResource( 7 )
+material/2 = SubResource( 4 )
+material/3 = SubResource( 5 )
 
 [node name="Wool" type="MeshInstance" parent="GodotBalls"]
 transform = Transform( 0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, -0.00747508, 0, 0 )
 mesh = ExtResource( 2 )
-material/0 = SubResource( 10 )
-material/1 = SubResource( 5 )
-material/2 = SubResource( 6 )
-material/3 = SubResource( 7 )
+material/0 = SubResource( 8 )
+material/1 = SubResource( 3 )
+material/2 = SubResource( 4 )
+material/3 = SubResource( 5 )
 
 [node name="toggle_plane_detection" type="Button" parent="."]
 margin_right = 164.0

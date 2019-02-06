@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://anchor.gd" type="Script" id=1]
 [ext_resource path="res://anchor_material.tres" type="Material" id=2]
@@ -16,6 +16,9 @@ roughness = 0.0
 material = SubResource( 1 )
 size = Vector2( 1, 1 )
 
+[sub_resource type="PlaneShape" id=3]
+
+
 [node name="ARVRAnchor" type="ARVRAnchor"]
 anchor_id = 0
 script = ExtResource( 1 )
@@ -24,5 +27,11 @@ script = ExtResource( 1 )
 cast_shadow = 0
 mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 3 )
+disabled = true
 
 [connection signal="mesh_updated" from="." to="." method="_on_ARVRAnchor_mesh_updated"]
