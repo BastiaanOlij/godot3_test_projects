@@ -10,15 +10,21 @@ func update_cameras(p_id):
 	camera_feeds = CameraServer.feeds()
 	
 	for feed in camera_feeds:
-		if (feed == current_camera_feed):
-			$CameraFeeds.text = feed.get_name()
-			found = true
+		var id = $CameraFeeds.get_item_count() + 1
+		var name = feed.get_name()
+		$CameraFeeds.add_item(name, id)
 		
-		$CameraFeeds.add_item(feed.get_name())
+		print("Added " + name + " at " + str(id))
+		
+		if (feed == current_camera_feed):
+			$CameraFeeds.selected = id
+			$CameraFeeds.text = name
+			found = true
 	
 	# no active camera or our camera was unplugged
 	if (!found and camera_feeds.size() > 0):
 		current_camera_feed = camera_feeds[0]
+		$CameraFeeds.selected = 1
 		$CameraFeeds.text = current_camera_feed.get_name()
 		
 		# and make it active!
@@ -27,8 +33,11 @@ func update_cameras(p_id):
 		# and update our environment
 		$Camera.get_environment().background_camera_feed_id = current_camera_feed.get_id()
 		
-func _on_CameraFeeds_item_selected( ID ):
-	var new_camera_feed = camera_feeds[ID]
+		print("Current camera: " + current_camera_feed.get_name() + ", " + str(current_camera_feed.get_transform()))
+
+func _on_CameraFeeds_item_selected( id ):
+	print("Selecting " + str(id))
+	var new_camera_feed = camera_feeds[id]
 	if (current_camera_feed != new_camera_feed):
 		# make the old one inactive
 		current_camera_feed.set_active(false);
@@ -39,11 +48,14 @@ func _on_CameraFeeds_item_selected( ID ):
 		
 		# and update our environment
 		$Camera.get_environment().background_camera_feed_id = current_camera_feed.get_id()
+		
+		print("Current camera: " + current_camera_feed.get_name() + ", " + str(current_camera_feed.get_transform()))
 
 func _ready():
 	update_cameras(0)
 	
-	print("Current camera: " + current_camera_feed.get_name() + ", " + str(current_camera_feed.get_transform()))
+	if current_camera_feed:
+		print("Current camera: " + current_camera_feed.get_name() + ", " + str(current_camera_feed.get_transform()))
 	
 	# if we add or remove a camera, make sure we update our cameras
 	CameraServer.connect("camera_feed_added", self, "update_cameras")

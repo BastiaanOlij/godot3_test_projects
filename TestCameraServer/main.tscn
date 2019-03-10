@@ -4,16 +4,13 @@
 [ext_resource path="res://Fonts/DroidSerif-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="Environment" id=1]
-
 background_mode = 6
 ambient_light_sky_contribution = 0.0
 ssao_blur = 1
 
 [sub_resource type="CubeMesh" id=2]
 
-
 [sub_resource type="DynamicFont" id=3]
-
 resource_name = "LargeDroid"
 size = 48
 font_data = ExtResource( 2 )
