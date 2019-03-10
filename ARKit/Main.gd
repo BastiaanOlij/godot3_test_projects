@@ -9,9 +9,10 @@ func tracker_added(p_name, p_type, p_id):
 		print("Adding " + name + " (" + p_name + ")")
 		
 		var new_anchor = anchor.instance()
-		$ARVROrigin.add_child(new_anchor)
 		new_anchor.anchor_id = p_id
 		new_anchor.name = name
+		
+		$ARVROrigin.add_child(new_anchor)
 
 func tracker_removed(p_name, p_type, p_id):
 	if p_type == ARVRServer.TRACKER_ANCHOR:
@@ -45,9 +46,8 @@ func _ready():
 		# we're doing AR :)
 		get_viewport().arvr = true
 		
-		# can't we just set this in the environment? doesn't seem to work out of the box
-		# arkit is ALWAYS 1
-		$ARVROrigin/ARVRCamera.environment.background_camera_feed_id = 1
+		# make sure our environment is set to the right camera feed
+		get_viewport().get_camera().environment.background_camera_feed_id = arkit.get_camera_feed_id()
 	else:
 		print("Couldn't find ARKit")
 		get_node("toggle_plane_detection").set_text("No ARKIT")
