@@ -1,22 +1,38 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/DroidSerif-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://YCbCr.shader" type="Shader" id=3]
 
 [sub_resource type="Environment" id=1]
-
 background_mode = 6
 ambient_light_sky_contribution = 0.0
 ssao_blur = 1
 
 [sub_resource type="CubeMesh" id=2]
 
-
 [sub_resource type="DynamicFont" id=3]
-
 resource_name = "LargeDroid"
 size = 48
 font_data = ExtResource( 2 )
+
+[sub_resource type="CameraTexture" id=5]
+camera_feed_id = 1
+which_feed = 1
+
+[sub_resource type="CameraTexture" id=6]
+camera_feed_id = 1
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 3 )
+shader_param/flip_horz = true
+shader_param/flip_vert = false
+shader_param/camera_y = SubResource( 6 )
+shader_param/camera_CbCr = SubResource( 5 )
+
+[sub_resource type="QuadMesh" id=4]
+material = SubResource( 7 )
+size = Vector2( 1.5, 1 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
@@ -55,4 +71,8 @@ custom_fonts/font = SubResource( 3 )
 enabled_focus_mode = 0
 flat = true
 
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.88365, 0, 0.468149, 0, 1, 0, -0.468149, 0, 0.88365, -0.860442, 0, -0.678389 )
+mesh = SubResource( 4 )
+material/0 = null
 [connection signal="item_selected" from="CameraFeeds" to="." method="_on_CameraFeeds_item_selected"]
