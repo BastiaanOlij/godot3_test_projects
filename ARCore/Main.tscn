@@ -40,5 +40,4 @@ margin_bottom = 266.0
 rect_scale = Vector2( 3, 3 )
 text = "Hello
 "
-
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
