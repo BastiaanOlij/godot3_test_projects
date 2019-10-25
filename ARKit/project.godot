@@ -29,5 +29,4 @@ singletons=[  ]
 
 [rendering]
 
-quality/shadows/filter_mode.mobile=1
 environment/default_environment="res://default_env.tres"
