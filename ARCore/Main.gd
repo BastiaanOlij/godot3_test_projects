@@ -14,15 +14,19 @@ func tracker_added(tracker_name, tracker_type, tracker_id):
 	if tracker_type == ARVRServer.TRACKER_ANCHOR:
 		var new_anchor = anchor_scene.instance()
 		
-		new_anchor.tracker_id = tracker_id
+		new_anchor.anchor_id = tracker_id
 		new_anchor.set_name("anchor_" + str(tracker_id))
 		
+		_add_log("New anchor: " + new_anchor.name)
 		$ARVROrigin.add_child(new_anchor)
+	else:
+		_add_log("huh?")
 
 func tracker_removed(tracker_name, tracker_type, tracker_id):
 	if tracker_type == ARVRServer.TRACKER_ANCHOR:
 		var anchor = $ARVROrigin.get_node("anchor_" + str(tracker_id))
 		if anchor:
+			_add_log("Removing anchor: " + anchor.name)
 			anchor.queue_free()
 
 func _add_log(text):
