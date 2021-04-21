@@ -3,7 +3,7 @@ extends Spatial
 var camera_feeds = Array()
 var current_camera_feed = null
 
-func update_cameras(p_id):
+func update_cameras():
 	var found = false
 	
 	$CameraFeeds.clear()
@@ -17,14 +17,14 @@ func update_cameras(p_id):
 		print("Added " + name + " at " + str(id))
 		
 		if (feed == current_camera_feed):
-			$CameraFeeds.selected = id
+			$CameraFeeds.selected = $CameraFeeds.get_item_index(id)
 			$CameraFeeds.text = name
 			found = true
 	
 	# no active camera or our camera was unplugged
 	if (!found and camera_feeds.size() > 0):
 		current_camera_feed = camera_feeds[0]
-		$CameraFeeds.selected = 1
+		$CameraFeeds.selected = 0
 		$CameraFeeds.text = current_camera_feed.get_name()
 		
 		# and make it active!
@@ -52,7 +52,7 @@ func _on_CameraFeeds_item_selected( id ):
 		print("Current camera: " + current_camera_feed.get_name() + ", " + str(current_camera_feed.get_transform()))
 
 func _ready():
-	update_cameras(0)
+	update_cameras()
 	
 	if current_camera_feed:
 		print("Current camera: " + current_camera_feed.get_name() + ", " + str(current_camera_feed.get_transform()))
